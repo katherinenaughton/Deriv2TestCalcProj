@@ -9,9 +9,7 @@ function=input("What function would you like to analyze? ")
 print("If you choose a log function, make sure your interval is within the domain :)")
 x1=int(input("Where do you want your interval to start (x value)? "))
 x2=int(input("Where do you want your interval to end (x value)? "))
-
-        
-#print(function)
+print(function)
 
 xcoordlist=[]                               #This prints a list of the x values. 
 for i in range(x1,x2+1):
@@ -23,24 +21,15 @@ for i in range(x1,x2+1):
             xcoordlist.append(i+m)
 #print(xcoordlist)
 
-
-    
-a=False
 ycoordlist=[]                               #This prints a list of the y values. 
 for r in xcoordlist:
     x=r
     Locfunction=function.lower()
-    try:
-        y=eval(Locfunction)
-        ycoordlist.append(y)
-    except: 
-        a=True
-        asymptote=r
-        print("There is a vertical asymptote at x=", asymptote, " in this function!")
+ 
+    y=eval(Locfunction)
+    ycoordlist.append(y)
 #print(ycoordlist)
-
-
-                                             #This will find the y+.001 value for the symmetric difference quotient.
+                                          #This will find the y+.001 value for the symmetric difference quotient.
 ycoordlist1=[]                              
 for r in xcoordlist:
     x=r+0.001
@@ -48,7 +37,6 @@ for r in xcoordlist:
     y=eval(Locfunction)
     ycoordlist1.append(y)
 #print(ycoordlist1)
-
 
 ycoordlist2=[]                              #This will find the y-.001 value for the symmetric differnce quotient. 
 for r in xcoordlist:
@@ -58,10 +46,24 @@ for r in xcoordlist:
     ycoordlist2.append(y)
 #print(ycoordlist2)
 
+ycoordlista=[]                              
+for r in xcoordlist:
+    x=r+0.002
+    Locfunction=function.lower()
+    y=eval(Locfunction)
+    ycoordlista.append(y)
+#print(ycoordlista)
+
+ycoordlistb=[]                              #This will find the y-.001 value for the symmetric differnce quotient. 
+for r in xcoordlist:
+    x=r-0.002
+    Locfunction=function.lower()
+    y=eval(Locfunction)
+    ycoordlistb.append(y)
+#print(ycoordlistb)
 
 intervalnum=len(ycoordlist1)                #This tells us how long our cordinate lists are 
 #print(intervalnum)                            #so we know how long to run the loop. 
-
 
 derivlist=[]                                #This makes a list of the derivatives, and a rounded list
 derivlist1=[]                                   #of the derivatives. 
@@ -71,23 +73,24 @@ for s in range(intervalnum):
     derivlist.append(deriv)
 #print (derivlist1)
 #print (derivlist)
+
 derivlista=[]                                #This makes a list of the derivatives, and a rounded list
 derivlista1=[]                                   #of the derivatives. 
 for s in range(intervalnum):
-    deriva  = ((ycoordlist1[s]+0.001)-(ycoordlist1[s]-0.001))/(2*0.001)
+    deriva  = ((ycoordlista[s])-(ycoordlist[s]))/(2*0.001)
     #derivlista1.append(round(deriva,2))
     derivlista.append(deriva)
 #print (derivlista1)
-print (derivlista)
+#print (derivlista)
 
 derivlistb=[]                                #This makes a list of the derivatives, and a rounded list
 derivlistb1=[]                                   #of the derivatives. 
 for s in range(intervalnum):
-    derivb  = ((ycoordlist2[s]+0.001)-(ycoordlist2[s]-0.001))/(2*0.001)
+    derivb  = ((ycoordlist[s])-(ycoordlistb[s]))/(2*0.001)
     #derivlistb1.append(round(derivb,2))
     derivlistb.append(derivb)
 #print (derivlistb1)
-print (derivlistb)
+#print (derivlistb)
     
 deriv2list=[]
 deriv2list1=[]
